@@ -5,6 +5,7 @@ variable "prefix" {
     condition     = can(regex("^[a-z0-9]{1,14}$", var.prefix))
     error_message = "Prefix must be 1-14 lowercase alphanumeric characters."
   }
+  default = "akb"
 }
 
 variable "location" {
@@ -15,6 +16,7 @@ variable "location" {
 variable "env" {
   type        = string
   description = "Value for the environment tag."
+  default = "dev"
   validation {
     condition     = contains(["dev", "test", "prod", "demo"], var.env)
     error_message = "Environment must be one of: dev, test, prod, demo."
@@ -60,6 +62,7 @@ variable "storage_replication_type" {
 variable "delete_retention_days" {
   type        = number
   description = "Number of days to retain deleted items."
+  default = 14
   validation {
     condition     = var.delete_retention_days >= 1 && var.delete_retention_days <= 30
     error_message = "Retention days must be between 1 and 30 days."

@@ -1,11 +1,12 @@
 variable "prefix" {
   type        = string
   description = "A prefix to add to the storage account name to make it unique. A random number will also be added."
+  default = "akb"
   validation {
     condition     = can(regex("^[a-z0-9]{1,14}$", var.prefix))
     error_message = "Prefix must be 1-14 lowercase alphanumeric characters."
   }
-  default = "akb"
+  
 }
 
 variable "location" {
@@ -62,7 +63,7 @@ variable "storage_replication_type" {
 variable "delete_retention_days" {
   type        = number
   description = "Number of days to retain deleted items."
-  default = 14
+  default = "14"
   validation {
     condition     = var.delete_retention_days >= 1 && var.delete_retention_days <= 30
     error_message = "Retention days must be between 1 and 30 days."
